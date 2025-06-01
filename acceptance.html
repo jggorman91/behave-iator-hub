@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use Agreement</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-xl max-w-2xl">
+      <h1 class="text-2xl font-bold mb-4 text-center">Welcome to Behave-iator Hub</h1>
+      <p class="mb-4 text-sm">
+        Before using this tool, you must read and accept our <a href="/terms.html" class="text-blue-600 underline" target="_blank">Terms of Service</a> and <a href="/license.html" class="text-blue-600 underline" target="_blank">Commercial Use License</a>.
+      </p>
+      <div class="bg-gray-100 p-4 rounded overflow-y-auto h-64 mb-4 text-sm border border-gray-300">
+        <p><strong>Summary:</strong></p>
+        <ul class="list-disc pl-6">
+          <li>This platform is for educational use only.</li>
+          <li>No part of the content may be sold or redistributed without written permission.</li>
+          <li>By proceeding, you agree to follow all usage rules set forth in our license.</li>
+        </ul>
+        <p class="mt-2">Please see the full documents linked above for complete legal terms.</p>
+      </div>
+
+      <form id="acceptForm">
+        <div class="flex items-center mb-4">
+          <input type="checkbox" id="accept" name="accept" class="mr-2">
+          <label for="accept" class="text-sm">I have read and agree to the Terms of Service and License.</label>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+          disabled
+          id="proceedBtn"
+        >
+          Proceed to Behave-iator Hub
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const checkbox = document.getElementById('accept');
+    const button = document.getElementById('proceedBtn');
+    const form = document.getElementById('acceptForm');
+
+    checkbox.addEventListener('change', () => {
+      button.disabled = !checkbox.checked;
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Store acceptance in localStorage (or trigger redirect/session handling)
+      localStorage.setItem('termsAccepted', 'true');
+      window.location.href = '/home.html'; // Replace with your main app page
+    });
+  </script>
+</body>
+</html>

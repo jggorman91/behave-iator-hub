@@ -49,6 +49,11 @@
         }
 
     </style>
+    <script>
+  if (!localStorage.getItem('termsAccepted')) {
+    window.location.href = '/acceptance.html';
+  }
+</script>
 </head>
 <body class="text-slate-900">
 

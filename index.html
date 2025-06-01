@@ -8,54 +8,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Slab:wght@700&family=Bungee&display=swap" rel="stylesheet">
+    
+    <script>
+      if (!localStorage.getItem('termsAccepted')) {
+        window.location.href = '/behave-iator-hub/acceptance.html';
+      }
+    </script>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #eef2f7; 
+            background-color: #eef2f7;
         }
-        .tool-card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .tool-card:hover {
-            transform: translateY(-6px); 
-            box-shadow: 0 12px 24px rgba(0,0,0,0.12); 
-        }
-        .hero-section {
-            background: linear-gradient(135deg, #374151 0%, #1f2937 100%); 
-        }
-        .main-title {
-             font-family: 'Bungee', cursive; 
-             letter-spacing: 0.05em; 
-             line-height: 1.1; 
-        }
-        .section-title {
-            font-family: 'Roboto Slab', serif;
-        }
-        .button-primary {
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .button-primary:hover {
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        .hero-image {
-            max-width: 280px; /* Max width for the image */
-            width: 100%;
-            border: 4px solid white; /* Optional: adds a border */
-        }
-        @media (min-width: 768px) { /* md breakpoint */
-            .hero-image {
-                max-width: 320px; 
-            }
-        }
-
+        /* ... your existing styles ... */
     </style>
-    <script>
- <script>
-  if (!localStorage.getItem('termsAccepted')) {
-    window.location.href = '/behave-iator-hub/acceptance.html';
-  }
-</script>
-</script>
 </head>
 <body class="text-slate-900">
 

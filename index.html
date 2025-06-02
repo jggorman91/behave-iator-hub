@@ -1,1186 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Function Based Problem Solving Worksheet</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./dist/output.css"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #e3f2fd; color: #334155; line-height: 1.6; }
-        .container { max-width: 1200px; margin: 1.5rem auto; padding: 2rem; background-color: #fff; border-radius: 1.25rem; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); }
-        .card { background-color: #fff; border-radius: 1rem; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08); padding: 1.75rem; margin-bottom: 1.75rem; border: 1px solid #d0eaff; }
-        textarea, input[type="text"], input[type="number"], input[type="date"], select {
-            border: 2px solid #90caf9; border-radius: 0.625rem; padding: 0.875rem; width: 100%; font-size: 1rem; line-height: 1.5;
-        }
-        textarea:focus, input[type="text"]:focus, input[type="number]:focus, input[type="date"]:focus, select:focus {
-            outline: none; border-color: #2196f3; box-shadow: 0 0 0 4px rgba(33,150,243,0.3);
-        }
-        button { display: inline-flex; align-items: center; justify-content: center; padding: 0.875rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s, transform 0.15s, box-shadow 0.3s; box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
-        button:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
-        .btn-primary { background-color: #2196f3; color: #fff; border: none; background-image: linear-gradient(to right,#2196f3,#1976d2);}
-        .btn-primary:hover { background-color: #1976d2; background-image: linear-gradient(to right,#1976d2,#1565c0);}
-        .btn-secondary { background-color: #e0e0e0; color: #424242; border: 1px solid #bdbdbd; background-image: linear-gradient(to right,#e0e0e0,#cccccc);}
-        .btn-secondary:hover { background-color: #cccccc; border-color: #9e9e9e; background-image: linear-gradient(to right,#cccccc,#9e9e9e);}
-        .loading-spinner { border: 4px solid rgba(255,255,255,0.3); border-top: 4px solid #fff; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; margin-right: 0.5rem;}
-        @keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
-        .plan-section { margin-bottom: 1.5rem; }
-        .plan-section h3 { font-weight: 700; margin-bottom: 0.75rem; color: #1976d2; font-size: 1.375rem;}
-        .behavior-block { border: 2px solid #90caf9; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem; background-color: #e3f2fd; box-shadow: 0 4px 8px rgba(0,0,0,0.08);}
-        .behavior-block-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid #64b5f6;}
-        .info-modal-parent {
-            position: relative;
-        }
-        .info-modal {
-            left: 0;
-            top: 100%;
-            min-width: 320px;
-            max-width: 500px;
-        }
-        .ai-output-content {
-            white-space: pre-line;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Behave-iator Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Slab:wght@700&family=Bungee&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #1f2937;
+    }
+    .tool-card {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .tool-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(255, 255, 255, 0.1);
+    }
+    .hero-section {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+    .main-title {
+      font-family: 'Bungee', cursive;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+    .section-title {
+      font-family: 'Roboto Slab', serif;
+    }
+    .button-primary {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    .button-primary:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    .hero-image {
+      max-width: 280px;
+      width: 100%;
+      border: 4px solid white;
+    }
+    @media (min-width: 768px) {
+      .hero-image {
+        max-width: 320px;
+      }
+    }
+  </style>
+  <script>
+    if (!localStorage.getItem('termsAccepted')) {
+      window.location.href = '/behave-iator-hub/acceptance.html';
+    }
+  </script>
 </head>
-<body class="bg-gray-100 p-4">
-    <div class="container">
-        <h1 class="text-4xl font-extrabold text-center text-blue-700 mb-8">
-            Function Based Problem Solving Worksheet
-        </h1>
+<body class="text-slate-100">
+
+  <header class="hero-section text-white py-16 md:py-20 shadow-xl">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center text-center md:text-left">
+      <div class="md:w-1/3 mb-8 md:mb-0 md:mr-10 flex justify-center md:justify-start">
+        <img src="https://jggorman91.github.io/behave-iator-hub/Behave-iator.png" alt="The Behave-iator Mascot" class="hero-image rounded-lg shadow-2xl" />
+      </div>
+      <div class="md:w-2/3">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold main-title">The Behave-iator</h1>
+        <p class="mt-6 md:mt-8 text-lg md:text-xl max-w-xl mx-auto md:mx-0 text-slate-300">
+          A collection of powerful, custom-built instruments to forge effective learning strategies and build student success.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-12 md:py-16">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-slate-100 mb-12 md:mb-16 section-title">
+      ACCESS THE ARSENAL
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+
+      <div class="tool-card bg-slate-800 rounded-lg shadow-lg overflow-hidden p-6 md:p-8 flex flex-col">
+        <h3 class="text-2xl font-semibold text-slate-100 mb-3 section-title">K-6 Unit Plan Constructor</h3>
+        <p class="text-slate-300 text-sm mb-6 flex-grow">
+          Forge robust 4-6 week unit plans for K-6. Targets Executive Functioning, Behavioral Skills, and core SEL competencies.
+        </p>
+        <a href="https://jggorman91.github.io/Unit-Generator/" class="button-primary mt-auto inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md text-center transition-colors duration-150 ease-in-out">
+          Launch Unit Constructor
+        </a>
+      </div>
+
+      <div class="tool-card bg-slate-800 rounded-lg shadow-lg overflow-hidden p-6 md:p-8 flex flex-col">
+        <h3 class="text-2xl font-semibold text-slate-100 mb-3 section-title">Behavior Strategy Builder</h3>
+        <p class="text-slate-300 text-sm mb-6 flex-grow">
+          Develop structured Functional Behavior Plans and Support Strategies (FBPSW) to systematically address student behavioral challenges.
+        </p>
+        <a href="https://jggorman91.github.io/FBPSW-Prototype/" class="button-primary mt-auto inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md text-center transition-colors duration-150 ease-in-out">
+          Open Strategy Builder
+        </a>
+      </div>
+
+      <div class="tool-card bg-slate-800 rounded-lg shadow-lg overflow-hidden p-6 md:p-8 flex flex-col">
+        <h3 class="text-2xl font-semibold text-slate-100 mb-3 section-title">Data Dashboard</h3>
+        <p class="text-slate-300 text-sm mb-6 flex-grow">
+          Visualize and analyze student behavior data to inform interventions and track progress effectively.
+        </p>
+        <a href="https://jggorman91.github.io/Data-Dashboard/" class="button-primary mt-auto inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-md text-center transition-colors duration-150 ease-in-out">
+          Go to Dashboard
+        </a>
+        </div>
+
+      <div class="tool-card bg-slate-700 border-2 border-dashed border-slate-400 hover:border-slate-300 rounded-lg p-6 md:p-8 flex flex-col">
+        <h3 class="text-2xl font-semibold text-slate-100 mb-3 section-title">Future Innovations</h3>
+        <p class="text-slate-400 text-sm mb-6 flex-grow">
+          Advanced solutions in educational technology are under construction. Prepare for the next powerful addition to the toolkit.
+        </p>
+        <a href="#" class="button-primary mt-auto inline-block bg-slate-600 hover:bg-slate-500 text-white font-bold py-3 px-6 rounded-md text-center transition-colors duration-150 ease-in-out">
+          Under Development
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-10 mt-16 text-center">
+    <div class="container mx-auto px-6">
+      <p class="text-sm">&copy; <span id="currentYear"></span> Joseph Gorman / The Behave-iator. All Rights Reserved.</p>
+      <p class="text-xs mt-2">Empowering educators with practical, high-impact solutions.</p>
+      <p class="text-xs mt-3">
+        <a href="disclaimer.html" class="text-slate-400 hover:text-slate-200 underline">Disclaimers and Terms of Use</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
 
-        <div class="card flex justify-between items-center bg-blue-50 border border-blue-200 p-4 mb-6">
-            <p class="text-blue-800 font-semibold">FBPSW: <span id="sessionStatusDisplay" class="font-normal text-blue-600">Active</span></p>
-            <button id="newPlanButton" class="btn-secondary">
-                <i class="fas fa-plus mr-2"></i> New Plan
-            </button>
-        </div>
-
-        <div class="card">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Teacher Input</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label for="studentAge" class="block text-gray-700 text-sm font-semibold mb-2">Student Age</label>
-                    <input type="number" id="studentAge" placeholder="e.g., 7" min="3" max="18">
-                </div>
-                <div>
-                    <label for="studentGrade" class="block text-gray-700 text-sm font-semibold mb-2">Student Grade Level</label>
-                    <select id="studentGrade">
-                        <option value="">Select Grade</option>
-                        <option value="K">Kindergarten</option>
-                        <option value="1st">1st Grade</option>
-                        <option value="2nd">2nd Grade</option>
-                        <option value="3rd">3rd Grade</option>
-                        <option value="4th">4th Grade</option>
-                        <option value="5th">5th Grade</option>
-                        <option value="6th">6th Grade</option>
-                        <option value="7th">7th Grade</option>
-                        <option value="8th">8th Grade</option>
-                        <option value="Higher">Higher Grades</option>
-                        <option value="Other">Other / Not Applicable</option>
-                    </select>
-                </div>
-
-                <div class="md:col-span-2">
-                    <label for="strengthsInterestsResiliency" class="block text-gray-700 text-sm font-semibold mb-2">Strengths, Interests, and Resiliency Factors</label>
-                    <textarea id="strengthsInterestsResiliency" rows="3" placeholder="e.g., Strong in art, loves dinosaurs, responds well to positive adult attention, supportive family..."></textarea>
-                </div>
-
-                <div id="behaviorsContainer" class="md:col-span-2">
-                    <div class="behavior-block" data-behavior-index="0">
-                        <div class="behavior-block-header">
-                            <h3 class="text-lg font-semibold text-gray-700">Behavior Pattern 1</h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="behaviorTypeSelect_0" class="block text-gray-700 text-sm font-semibold mb-2">Behavior Type</label>
-                                <select id="behaviorTypeSelect_0">
-                                    <option value="">Select Behavior Type</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="antecedentSelect_0" class="block text-gray-700 text-sm font-semibold mb-2">Antecedent</label>
-                                <select id="antecedentSelect_0">
-                                    <option value="">Select Antecedent</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="behaviorSelect_0" class="block text-gray-700 text-sm font-semibold mb-2">Specific Behavior</label>
-                                <select id="behaviorSelect_0">
-                                    <option value="">Select Specific Behavior</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="consequenceSelect_0" class="block text-gray-700 text-sm font-semibold mb-2">Typical Consequence</label>
-                                <select id="consequenceSelect_0">
-                                    <option value="">Select Consequence</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="behavior-block" data-behavior-index="1">
-                        <div class="behavior-block-header">
-                                <h3 class="text-lg font-semibold text-gray-700">Behavior Pattern 2 (Optional)</h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           <div>
-                                <label for="behaviorTypeSelect_1" class="block text-gray-700 text-sm font-semibold mb-2">Behavior Type</label>
-                                <select id="behaviorTypeSelect_1">
-                                    <option value="">Select Behavior Type</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="antecedentSelect_1" class="block text-gray-700 text-sm font-semibold mb-2">Antecedent</label>
-                                <select id="antecedentSelect_1">
-                                    <option value="">Select Antecedent</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="behaviorSelect_1" class="block text-gray-700 text-sm font-semibold mb-2">Specific Behavior</label>
-                                <select id="behaviorSelect_1">
-                                    <option value="">Select Specific Behavior</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="consequenceSelect_1" class="block text-gray-700 text-sm font-semibold mb-2">Typical Consequence</label>
-                                <select id="consequenceSelect_1">
-                                    <option value="">Select Consequence</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="behavior-block" data-behavior-index="2">
-                        <div class="behavior-block-header">
-                                <h3 class="text-lg font-semibold text-gray-700">Behavior Pattern 3 (Optional)</h3>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="behaviorTypeSelect_2" class="block text-gray-700 text-sm font-semibold mb-2">Behavior Type</label>
-                                <select id="behaviorTypeSelect_2">
-                                    <option value="">Select Behavior Type</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="antecedentSelect_2" class="block text-gray-700 text-sm font-semibold mb-2">Antecedent</label>
-                                <select id="antecedentSelect_2">
-                                    <option value="">Select Antecedent</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="behaviorSelect_2" class="block text-gray-700 text-sm font-semibold mb-2">Specific Behavior</label>
-                                <select id="behaviorSelect_2">
-                                    <option value="">Select Specific Behavior</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="consequenceSelect_2" class="block text-gray-700 text-sm font-semibold mb-2">Typical Consequence</label>
-                                <select id="consequenceSelect_2">
-                                    <option value="">Select Consequence</option>
-                                    <option value="Other">Other (Specify in Notes)</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <label for="anecdotal" class="block text-gray-700 text-sm font-semibold mb-2">Anecdotal Notes (include information about frequency, intensity, duration of behaviors if known)</label>
-                    <textarea id="anecdotal" rows="3" placeholder="e.g., Student exhibits task refusal daily during math, lasting 5-10 minutes..."></textarea>
-                </div>
-                <div>
-                    <label for="reinforcerPreferences" class="block text-gray-700 text-sm font-semibold mb-2">Student's Preferred Reinforcers</label>
-                    <textarea id="reinforcerPreferences" rows="2" placeholder="e.g., Loves computer time, enjoys drawing..."></textarea>
-                </div>
-
-                <div class="info-modal-parent">
-                    <div class="flex items-center mb-1">
-                        <label for="behavioralSkillsSelect" class="block text-gray-700 text-sm font-semibold">Behavioral Skills Level</label>
-                        <i id="behavioralInfoIcon" class="fas fa-info-circle text-blue-500 ml-2 cursor-pointer hover:text-blue-700" title="Show behavioral levels"></i>
-                    </div>
-                    <select id="behavioralSkillsSelect">
-                        <option value="">Select Level</option>
-                        <option value="Foundational Regulator">Foundational Regulator</option>
-                        <option value="Guided Participant">Guided Participant</option>
-                        <option value="Emerging Self-Manager">Emerging Self-Manager</option>
-                        <option value="Flexible Adapter">Flexible Adapter</option>
-                        <option value="Intentional Strategist">Intentional Strategist</option>
-                        <option value="Reflective Adapter">Reflective Adapter</option>
-                        <option value="Independent Regulator">Independent Regulator</option>
-                        <option value="Strategic Manager">Strategic Manager</option>
-                        <option value="Autonomous Problem-Solver">Autonomous Problem-Solver</option>
-                    </select>
-                    <div id="behavioralInfoModal" class="info-modal hidden absolute z-50 mt-1 p-4 bg-white border-2 border-blue-300 rounded-lg shadow-xl">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="text-md font-semibold text-blue-700">Behavioral Developmental Levels</h4>
-                            <button id="closeBehavioralModal" class="text-gray-500 hover:text-gray-800 text-2xl leading-none">&times;</button>
-                        </div>
-                        <table class="w-full text-xs table-fixed">
-                            <thead class="sticky top-0 bg-blue-100">
-                                <tr>
-                                    <th class="p-1 text-left font-semibold text-blue-800 w-1/3">Level</th>
-                                    <th class="p-1 text-left font-semibold text-blue-800 w-2/3">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-gray-700">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="info-modal-parent">
-                    <div class="flex items-center mb-1">
-                        <label for="socialSkillsSelect" class="block text-gray-700 text-sm font-semibold">Social Skills Level</label>
-                        <i id="socialInfoIcon" class="fas fa-info-circle text-blue-500 ml-2 cursor-pointer hover:text-blue-700" title="Show social levels"></i>
-                    </div>
-                    <select id="socialSkillsSelect">
-                        <option value="">Select Level</option>
-                        <option value="Social Initiator">Social Initiator</option>
-                        <option value="Emerging Peer">Emerging Peer</option>
-                        <option value="Collaborative Partner">Collaborative Partner</option>
-                        <option value="Connected Participant">Connected Participant</option>
-                        <option value="Social Navigator">Social Navigator</option>
-                        <option value="Empathetic Ally">Empathetic Ally</option>
-                        <option value="Relational Strategist">Relational Strategist</option>
-                        <option value="Social Integrator">Social Integrator</option>
-                        <option value="Leadership Model">Leadership Model</option>
-                    </select>
-                    <div id="socialInfoModal" class="info-modal hidden absolute z-50 mt-1 p-4 bg-white border-2 border-blue-300 rounded-lg shadow-xl">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="text-md font-semibold text-blue-700">Social Developmental Levels</h4>
-                            <button id="closeSocialModal" class="text-gray-500 hover:text-gray-800 text-2xl leading-none">&times;</button>
-                        </div>
-                        <table class="w-full text-xs table-fixed">
-                            <thead class="sticky top-0 bg-blue-100">
-                                <tr>
-                                    <th class="p-1 text-left font-semibold text-blue-800 w-1/3">Level</th>
-                                    <th class="p-1 text-left font-semibold text-blue-800 w-2/3">Description</th>
-                                </tr>
-                            </thead>
-                               <tbody class="text-gray-700">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="info-modal-parent">
-                    <div class="flex items-center mb-1">
-                        <label for="pragmaticLanguageSkillsSelect" class="block text-gray-700 text-sm font-semibold">Pragmatic Language Skills Level</label>
-                        <i id="pragmaticInfoIcon" class="fas fa-info-circle text-blue-500 ml-2 cursor-pointer hover:text-blue-700" title="Show pragmatic language levels"></i>
-                    </div>
-                    <select id="pragmaticLanguageSkillsSelect">
-                        <option value="">Select Level</option>
-                        <option value="Foundational Communicator">Foundational Communicator</option>
-                        <option value="Emerging Conversationalist">Emerging Conversationalist</option>
-                        <option value="Functional Speaker">Functional Speaker</option>
-                        <option value="Social Interpreter">Social Interpreter</option>
-                        <option value="Contextual Communicator">Contextual Communicator</option>
-                        <option value="Purposeful Speaker">Purposeful Speaker</option>
-                        <option value="Strategic Conversationalist">Strategic Conversationalist</option>
-                        <option value="Adaptive Communicator">Adaptive Communicator</option>
-                        <option value="Discourse Leader">Discourse Leader</option>
-                    </select>
-                       <div id="pragmaticInfoModal" class="info-modal hidden absolute z-50 mt-1 p-4 bg-white border-2 border-blue-300 rounded-lg shadow-xl">
-                        <div class="flex justify-between items-center mb-2">
-                            <h4 class="text-md font-semibold text-blue-700">Pragmatic Language Developmental Levels</h4>
-                            <button id="closePragmaticModal" class="text-gray-500 hover:text-gray-800 text-2xl leading-none">&times;</button>
-                        </div>
-                        <table class="w-full text-xs table-fixed">
-                            <thead class="sticky top-0 bg-blue-100">
-                                <tr>
-                                    <th class="p-1 text-left font-semibold text-blue-800 w-1/3">Level</th>
-                                    <th class="p-1 text-left font-semibold text-blue-800 w-2/3">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-gray-700">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="md:col-span-2">
-                    <label class="block text-gray-700 text-sm font-semibold mb-2">Add pertinent referral information?</label>
-                    <div class="flex items-center space-x-4 mb-4">
-                        <label class="inline-flex items-center">
-                            <input type="radio" name="addReferralInfo" value="yes" class="form-radio" id="addReferralYes">
-                            <span class="ml-2 text-gray-700">Yes</span>
-                        </label>
-                        <label class="inline-flex items-center">
-                            <input type="radio" name="addReferralInfo" value="no" class="form-radio" id="addReferralNo" checked>
-                            <span class="ml-2 text-gray-700">No</span>
-                        </label>
-                    </div>
-                    <div id="referralInfoContainer" class="hidden">
-                        <label for="referral" class="block text-gray-700 text-sm font-semibold mb-2">Referral Information</label>
-                        <textarea id="referral" rows="4" placeholder="e.g., Student referred for disruptive behavior..."></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-6 flex justify-end">
-                <button id="generateBIPButton" class="btn-primary">
-                    <span id="generateBIPSpinner" class="loading-spinner hidden"></span>
-                    Generate Plan
-                </button>
-            </div>
-        </div>
-
-        <div id="bipOutput" class="card hidden">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Generated Function Based Problem Solving Worksheet</h2>
-            <div class="mb-4">
-                <p id="bipFunctionHypothesis" class="text-blue-600 font-medium text-xl whitespace-pre-line"></p>
-            </div>
-            <div class="plan-section">
-                <h3>Antecedent Strategies:</h3>
-                <div id="bipAntecedentStrategies" class="prose max-w-none text-gray-800 ai-output-content"></div>
-            </div>
-            <div class="plan-section">
-                <h3>Short-term Replacement Behaviors:</h3>
-                <div id="bipShortTermBehaviors" class="prose max-w-none text-gray-800 ai-output-content"></div>
-            </div>
-            <div class="plan-section">
-                <h3>Teaching Strategies for Short-Term Replacement Behaviors:</h3>
-                <div id="bipTeachingStrategies" class="prose max-w-none text-gray-800 ai-output-content"></div>
-            </div>
-            <div class="plan-section">
-                <h3>Reinforcement Strategies for Short-Term Replacement Behaviors:</h3>
-                <div id="bipReinforcementShortTerm" class="prose max-w-none text-gray-800 ai-output-content"></div>
-            </div>
-            <div class="plan-section">
-                <h3>Long-term Replacement Behaviors:</h3>
-                <div id="bipLongTermBehaviors" class="prose max-w-none text-gray-800 ai-output-content"></div>
-            </div>
-            <div class="plan-section">
-                <h3>Response Strategies for Problem Behavior:</h3>
-                <div id="bipResponseStrategies" class="prose max-w-none text-gray-800 ai-output-content"></div>
-            </div>
-
-            <div class="plan-section">
-                <h3>Monitoring and Plan Review:</h3>
-                <div id="monitoringStatementContent" class="prose max-w-none text-gray-800">
-                    <p>This plan needs to be reviewed by the school team no less than every four to six weeks starting the 25-26 school year. If the plan is not working, then some aspects should be revised at the meeting. If the plan is successful (extinguished maladaptive behaviors) for four consecutive weeks, then the IEP team should meet to amend the IEP and turn it into a full behavior intervention plan (BIP). Data supporting more intervention or success will be determined by Infinite Campus classroom incidents and referrals.</p>
-                </div>
-            </div>
-
-            <div class="mt-6 flex justify-end space-x-4">
-                <button id="copyBIPButton" class="btn-secondary">
-                    <i class="fas fa-copy mr-2"></i> Copy Plan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script type="module">
-        // --- Data for ABC dropdowns from "ABC_Framework_Behavior_Plan (Chat GPT Orginal)" ---
-        const bipData = {
-            "Physical Aggression": {
-                antecedents: ["Challenging tasks", "denial of requests", "transitions", "peer conflicts", "sensory overload"],
-                behaviors: ["Hitting", "kicking", "biting", "throwing objects", "spitting"],
-                consequences: ["Removal from activity", "loss of privileges", "peer avoidance", "adult attention"]
-            },
-            "Verbal Aggression": {
-                antecedents: ["Denial", "corrections", "peer teasing", "unexpected changes"],
-                behaviors: ["Yelling", "name-calling", "threats", "arguing"],
-                consequences: ["Time-outs", "reprimands", "loss of privileges", "peer reactions"]
-            },
-            "Self-Injurious Behavior": {
-                antecedents: ["High demands", "sensory discomfort", "emotional distress"],
-                behaviors: ["Head banging", "biting self", "scratching", "hair pulling"],
-                consequences: ["Intervention for safety", "task removal", "comfort provided"]
-            },
-            "Task Refusal / Noncompliance": {
-                antecedents: ["Difficult tasks", "transitions", "denied requests"],
-                behaviors: ["Saying 'no,' ignoring instructions", "leaving area"],
-                consequences: ["Task postponed", "breaks given", "adult prompts"]
-            },
-            "Elopement (Running Away)": {
-                antecedents: ["Non-preferred settings", "transitions", "unstructured times"],
-                behaviors: ["Leaving supervised area", "running away"],
-                consequences: ["Chased by staff", "increased supervision", "loss of privileges"]
-            },
-            "Disruptive Behavior (Non-Aggressive)": {
-                antecedents: ["Boring tasks", "lack of engagement", "unstructured periods"],
-                behaviors: ["Talking out", "making noises", "wandering"],
-                consequences: ["Teacher attention", "loss of rewards", "peer reactions"]
-            },
-            "Off-Task Behavior": {
-                antecedents: ["Tasks too easy or hard", "unclear instructions"],
-                behaviors: ["Daydreaming", "fiddling", "slow task initiation"],
-                consequences: ["Prompts to focus", "task simplification", "loss of privileges"]
-            },
-            "Property Destruction": {
-                antecedents: ["Denied access to desired items", "unstructured moments"],
-                behaviors: ["Tearing materials", "breaking objects", "drawing on property"],
-                consequences: ["Required cleanup", "loss of items", "time-out"]
-            }
-        };
-
-        // --- Data for Developmental Level Modals from "Psychological_Developmental_Levels_Framework (Chat GPT Orginal)" ---
-        const developmentalLevels = {
-            behavioral: [
-                { level: "Foundational Regulator", description: "Begins to respond to adult direction and follow basic instructions." },
-                { level: "Guided Participant", description: "Learning routines and starting to manage impulses with support." },
-                { level: "Emerging Self-Manager", description: "Follows daily expectations with minimal prompting; early signs of self-regulation." },
-                { level: "Flexible Adapter", description: "Demonstrates behavioral awareness and adjusts actions to meet expectations." },
-                { level: "Intentional Strategist", description: "Uses learned strategies to manage feelings and stay engaged." },
-                { level: "Reflective Adapter", description: "Reflects on decisions and alters behavior based on environment." },
-                { level: "Independent Regulator", description: "Applies strategies independently; shows accountability for behavior." },
-                { level: "Strategic Manager", description: "Manages emotions in different settings with consistent strategy use." },
-                { level: "Autonomous Problem-Solver", description: "Independently evaluates actions and mentors peers in regulation." }
-            ],
-            social: [
-                { level: "Social Initiator", description: "Begins to interact and show interest in social contact." },
-                { level: "Emerging Peer", description: "Engages in basic group participation and follows simple social rules." },
-                { level: "Collaborative Partner", description: "Cooperates in tasks with support and initiates teamwork." },
-                { level: "Connected Participant", description: "Shares ideas and respects others’ contributions." },
-                { level: "Social Navigator", description: "Develops friendships and adapts to group dynamics." },
-                { level: "Empathetic Ally", description: "Demonstrates empathy and resolves social issues constructively." },
-                { level: "Relational Strategist", description: "Balances personal identity with social inclusion." },
-                { level: "Social Integrator", description: "Manages complex peer relationships and social contexts." },
-                { level: "Leadership Model", description: "Demonstrates leadership and models inclusive practices." }
-            ],
-            pragmatic: [
-                { level: "Foundational Communicator", description: "Uses simple phrases to express needs and respond to others." },
-                { level: "Emerging Conversationalist", description: "Begins conversations and uses basic conversational norms." },
-                { level: "Functional Speaker", description: "Carries conversations and clarifies when needed." },
-                { level: "Social Interpreter", description: "Uses humor and manages dialogue in social settings." },
-                { level: "Contextual Communicator", description: "Adapts speech to suit audience and situation." },
-                { level: "Purposeful Speaker", description: "Expresses intentions clearly and addresses breakdowns in communication." },
-                { level: "Strategic Conversationalist", description: "Engages in layered, intentional discussions." },
-                { level: "Adaptive Communicator", description: "Uses appropriate communication across varied settings." },
-                { level: "Discourse Leader", description: "Communicates abstract ideas and leads discussions." }
-            ]
-        };
-
-        // --- Data for Grade-Level Context from "Combined_Developmental_Levels_by_Grade.docx" ---
-        const gradeLevelContexts = {
-            "K": {
-                behavioral: "Foundational Regulator to Guided Participant – Students are beginning to follow adult guidance, learn classroom routines, and require support to manage impulses.",
-                social: "Social Initiator to Emerging Peer – Students start interacting with others and learn simple social rules and group participation.",
-                language: "Foundational Communicator to Emerging Conversationalist – Students use basic language to express needs and begin short conversations using polite terms."
-            },
-            "1st": {
-                behavioral: "Foundational Regulator to Guided Participant – Students are beginning to follow adult guidance, learn classroom routines, and require support to manage impulses.",
-                social: "Social Initiator to Emerging Peer – Students start interacting with others and learn simple social rules and group participation.",
-                language: "Foundational Communicator to Emerging Conversationalist – Students use basic language to express needs and begin short conversations using polite terms."
-            },
-            "2nd": {
-                behavioral: "Emerging Self-Manager to Flexible Adapter – Students follow routines with less prompting and begin showing behavioral awareness.",
-                social: "Collaborative Partner to Connected Participant – Students start cooperating in tasks and respecting others' contributions in group settings.",
-                language: "Functional Speaker to Social Interpreter – Students maintain conversations and begin using humor or negotiation during interactions."
-            },
-            "3rd": {
-                behavioral: "Emerging Self-Manager to Flexible Adapter – Students follow routines with less prompting and begin showing behavioral awareness.",
-                social: "Collaborative Partner to Connected Participant – Students start cooperating in tasks and respecting others' contributions in group settings.",
-                language: "Functional Speaker to Social Interpreter – Students maintain conversations and begin using humor or negotiation during interactions."
-            },
-            "4th": {
-                behavioral: "Intentional Strategist to Reflective Adapter – Students apply coping strategies and reflect on behaviors to adjust to expectations.",
-                social: "Social Navigator to Empathetic Ally – Students form friendships, include others, and begin resolving social conflicts empathetically.",
-                language: "Contextual Communicator to Purposeful Speaker – Students adapt language to the setting and begin to discuss with clear intent and reasoning."
-            },
-            "5th": {
-                behavioral: "Intentional Strategist to Reflective Adapter – Students apply coping strategies and reflect on behaviors to adjust to expectations.",
-                social: "Social Navigator to Empathetic Ally – Students form friendships, include others, and begin resolving social conflicts empathetically.",
-                language: "Contextual Communicator to Purposeful Speaker – Students adapt language to the setting and begin to discuss with clear intent and reasoning."
-            },
-            "6th": {
-                behavioral: "Independent Regulator to Autonomous Problem-Solver – Students regulate behavior independently, show accountability, and support peers.",
-                social: "Relational Strategist to Leadership Model – Students manage social identity, complex relationships, and lead by modeling inclusiveness.",
-                language: "Strategic Conversationalist to Discourse Leader – Students use advanced dialogue, adjust communication styles across settings, and engage in persuasive or abstract discussions."
-            },
-            "7th": {
-                behavioral: "Independent Regulator to Autonomous Problem-Solver – Students regulate behavior independently, show accountability, and support peers.",
-                social: "Relational Strategist to Leadership Model – Students manage social identity, complex relationships, and lead by modeling inclusiveness.",
-                language: "Strategic Conversationalist to Discourse Leader – Students use advanced dialogue, adjust communication styles across settings, and engage in persuasive or abstract discussions."
-            },
-            "8th": {
-                behavioral: "Independent Regulator to Autonomous Problem-Solver – Students regulate behavior independently, show accountability, and support peers.",
-                social: "Relational Strategist to Leadership Model – Students manage social identity, complex relationships, and lead by modeling inclusiveness.",
-                language: "Strategic Conversationalist to Discourse Leader – Students use advanced dialogue, adjust communication styles across settings, and engage in persuasive or abstract discussions."
-            }
-        };
-
-
-        // DOM elements
-        const studentAgeInput = document.getElementById('studentAge');
-        const studentGradeSelect = document.getElementById('studentGrade');
-        const strengthsInterestsResiliencyInput = document.getElementById('strengthsInterestsResiliency');
-        const reinforcerPreferencesInput = document.getElementById('reinforcerPreferences');
-        const behavioralSkillsSelect = document.getElementById('behavioralSkillsSelect');
-        const socialSkillsSelect = document.getElementById('socialSkillsSelect');
-        const pragmaticLanguageSkillsSelect = document.getElementById('pragmaticLanguageSkillsSelect');
-        const anecdotalInput = document.getElementById('anecdotal');
-        const referralInput = document.getElementById('referral');
-        const generateBIPButton = document.getElementById('generateBIPButton');
-        const generateBIPSpinner = document.getElementById('generateBIPSpinner');
-        const bipOutputDiv = document.getElementById('bipOutput');
-        const bipFunctionHypothesis = document.getElementById('bipFunctionHypothesis');
-        const bipAntecedentStrategies = document.getElementById('bipAntecedentStrategies');
-        const bipShortTermBehaviors = document.getElementById('bipShortTermBehaviors');
-        const bipTeachingStrategies = document.getElementById('bipTeachingStrategies');
-        const bipReinforcementShortTerm = document.getElementById('bipReinforcementShortTerm');
-        const bipLongTermBehaviors = document.getElementById('bipLongTermBehaviors');
-        const bipResponseStrategies = document.getElementById('bipResponseStrategies');
-        const copyBIPButton = document.getElementById('copyBIPButton');
-        const sessionStatusDisplay = document.getElementById('sessionStatusDisplay');
-        const addReferralYes = document.getElementById('addReferralYes');
-        const addReferralNo = document.getElementById('addReferralNo');
-        const referralInfoContainer = document.getElementById('referralInfoContainer');
-        const monitoringStatementContentElement = document.getElementById('monitoringStatementContent');
-
-        const behavioralInfoIcon = document.getElementById('behavioralInfoIcon');
-        const behavioralInfoModal = document.getElementById('behavioralInfoModal');
-        const closeBehavioralModalButton = document.getElementById('closeBehavioralModal');
-
-        const socialInfoIcon = document.getElementById('socialInfoIcon');
-        const socialInfoModal = document.getElementById('socialInfoModal');
-        const closeSocialModalButton = document.getElementById('closeSocialModal');
-
-        const pragmaticInfoIcon = document.getElementById('pragmaticInfoIcon');
-        const pragmaticInfoModal = document.getElementById('pragmaticInfoModal');
-        const closePragmaticModalButton = document.getElementById('closePragmaticModal');
-
-
-        addReferralYes.addEventListener('change', () => {
-            referralInfoContainer.classList.remove('hidden');
-        });
-        addReferralNo.addEventListener('change', () => {
-            referralInfoContainer.classList.add('hidden');
-        });
-
-        function populateSelectWithOptions(selectElement, optionsArray, defaultOptionText, keepOther = true) {
-            let otherOptionHTML = '';
-            if (keepOther) {
-                const existingOther = selectElement.querySelector('option[value="Other"]');
-                if (existingOther) {
-                    otherOptionHTML = existingOther.outerHTML;
-                } else {
-                    otherOptionHTML = '<option value="Other">Other (Specify in Notes)</option>';
-                }
-            }
-            selectElement.innerHTML = `<option value="">${defaultOptionText}</option>`;
-            if (optionsArray && Array.isArray(optionsArray)) {
-                optionsArray.forEach(optionText => {
-                    const option = document.createElement('option');
-                    option.value = optionText;
-                    option.textContent = optionText;
-                    selectElement.appendChild(option);
-                });
-            }
-            if (keepOther && otherOptionHTML) {
-                selectElement.insertAdjacentHTML('beforeend', otherOptionHTML);
-            }
-        }
-
-        function initializeBehaviorDropdowns() {
-            const behaviorTypeKeys = Object.keys(bipData);
-            for (let i = 0; i < 3; i++) {
-                const behaviorTypeSelect = document.getElementById(`behaviorTypeSelect_${i}`);
-                const antecedentSelect = document.getElementById(`antecedentSelect_${i}`);
-                const behaviorSelect = document.getElementById(`behaviorSelect_${i}`);
-                const consequenceSelect = document.getElementById(`consequenceSelect_${i}`);
-
-                if (!behaviorTypeSelect) {
-                    console.error(`ERROR: Element with ID 'behaviorTypeSelect_${i}' not found.`);
-                    continue;
-                }
-                if (!antecedentSelect) console.warn(`Warning: Element with ID 'antecedentSelect_${i}' not found. Dependent dropdown will not work for block ${i}.`);
-                if (!behaviorSelect) console.warn(`Warning: Element with ID 'behaviorSelect_${i}' not found. Dependent dropdown will not work for block ${i}.`);
-                if (!consequenceSelect) console.warn(`Warning: Element with ID 'consequenceSelect_${i}' not found. Dependent dropdown will not work for block ${i}.`);
-
-                populateSelectWithOptions(behaviorTypeSelect, behaviorTypeKeys, "Select Behavior Type");
-
-                behaviorTypeSelect.addEventListener('change', function() {
-                    const selectedBehaviorType = this.value;
-                    const currentBlockHeader = this.closest('.behavior-block').querySelector('h3');
-                    if (selectedBehaviorType && currentBlockHeader) {
-                            if (selectedBehaviorType === "Other") {
-                                currentBlockHeader.textContent = `Behavior Pattern ${parseInt(this.closest('.behavior-block').dataset.behaviorIndex) + 1} (Other - specify in notes)`;
-                            } else {
-                                currentBlockHeader.textContent = selectedBehaviorType; // Update header to Behavior Type
-                            }
-                    } else if (currentBlockHeader) {
-                            currentBlockHeader.textContent = `Behavior Pattern ${parseInt(this.closest('.behavior-block').dataset.behaviorIndex) + 1}${parseInt(this.closest('.behavior-block').dataset.behaviorIndex) > 0 ? ' (Optional)' : '' }`;
-                    }
-
-
-                    if (selectedBehaviorType && bipData[selectedBehaviorType]) {
-                        if (antecedentSelect) populateSelectWithOptions(antecedentSelect, bipData[selectedBehaviorType].antecedents, "Select Antecedent");
-                        if (behaviorSelect) populateSelectWithOptions(behaviorSelect, bipData[selectedBehaviorType].behaviors, "Select Specific Behavior");
-                        if (consequenceSelect) populateSelectWithOptions(consequenceSelect, bipData[selectedBehaviorType].consequences, "Select Consequence");
-                    } else {
-                        if (antecedentSelect) populateSelectWithOptions(antecedentSelect, [], "Select Antecedent (after choosing type)");
-                        if (behaviorSelect) populateSelectWithOptions(behaviorSelect, [], "Select Specific Behavior (after choosing type)");
-                        if (consequenceSelect) populateSelectWithOptions(consequenceSelect, [], "Select Consequence (after choosing type)");
-                    }
-                });
-                if (antecedentSelect) populateSelectWithOptions(antecedentSelect, [], "Select Antecedent (after choosing type)");
-                if (behaviorSelect) populateSelectWithOptions(behaviorSelect, [], "Select Specific Behavior (after choosing type)");
-                if (consequenceSelect) populateSelectWithOptions(consequenceSelect, [], "Select Consequence (after choosing type)");
-            }
-        }
-
-        function populateInfoModalTable(modalBodyElement, levelsData) {
-            modalBodyElement.innerHTML = ''; // Clear existing rows
-            levelsData.forEach(item => {
-                const row = modalBodyElement.insertRow();
-                const levelCell = row.insertCell();
-                const descriptionCell = row.insertCell();
-                levelCell.className = 'p-1 border-t align-top';
-                descriptionCell.className = 'p-1 border-t align-top';
-                levelCell.textContent = item.level;
-                descriptionCell.textContent = item.description;
-            });
-        }
-
-        function setupInfoModal(iconId, modalId, closeButtonId, levelsData) {
-            const icon = document.getElementById(iconId);
-            const modal = document.getElementById(modalId);
-            const closeButton = document.getElementById(closeButtonId);
-            const modalTableBody = modal.querySelector('tbody');
-
-            if (modalTableBody && levelsData) {
-                populateInfoModalTable(modalTableBody, levelsData);
-            }
-
-            if (icon && modal) {
-                icon.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    [behavioralInfoModal, socialInfoModal, pragmaticInfoModal].forEach(m => {
-                        if (m && m !== modal) m.classList.add('hidden');
-                    });
-                    modal.classList.toggle('hidden');
-                });
-            }
-            if (closeButton && modal) {
-                closeButton.addEventListener('click', () => {
-                    modal.classList.add('hidden');
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeBehaviorDropdowns();
-            setupInfoModal('behavioralInfoIcon', 'behavioralInfoModal', 'closeBehavioralModal', developmentalLevels.behavioral);
-            setupInfoModal('socialInfoIcon', 'socialInfoModal', 'closeSocialModal', developmentalLevels.social);
-            setupInfoModal('pragmaticInfoIcon', 'pragmaticInfoModal', 'closePragmaticModal', developmentalLevels.pragmatic);
-        });
-
-        document.addEventListener('click', (event) => {
-            const modals = [behavioralInfoModal, socialInfoModal, pragmaticInfoModal];
-            const icons = [behavioralInfoIcon, socialInfoIcon, pragmaticInfoIcon];
-
-            modals.forEach((modal, index) => {
-                if (modal && !modal.classList.contains('hidden')) {
-                    let currentIcon = icons[index];
-                    let targetIsIconOrChild = false;
-                    if (currentIcon) {
-                        targetIsIconOrChild = currentIcon.contains(event.target) || currentIcon === event.target;
-                    }
-
-                    if (!modal.contains(event.target) && !targetIsIconOrChild) {
-                        modal.classList.add('hidden');
-                    }
-                }
-            });
-        });
-
-        function generateLocalBIP() {
-            const sections = {};
-
-            const age = studentAgeInput.value ? parseInt(studentAgeInput.value) : null;
-            const grade = studentGradeSelect.value || 'Not specified';
-            const strengthsInterests = strengthsInterestsResiliencyInput.value.trim() || 'unspecified strengths, interests, and resiliency factors';
-            const reinforcers = reinforcerPreferencesInput.value.trim() || 'unspecified preferred reinforcers';
-            const anecdotal = anecdotalInput.value.trim() || 'no specific anecdotal notes provided.';
-            const referral = referralInfoContainer.classList.contains('hidden') ? '' : referralInput.value.trim();
-            const behavioralLevel = behavioralSkillsSelect.value || 'Not specified';
-            const socialLevel = socialSkillsSelect.value || 'Not specified';
-            const pragmaticLevel = pragmaticLanguageSkillsSelect.value || 'Not specified';
-
-            const behaviorPatterns = [];
-            for (let i = 0; i < 3; i++) {
-                const typeSelect = document.getElementById(`behaviorTypeSelect_${i}`);
-                const antecedentSelect = document.getElementById(`antecedentSelect_${i}`);
-                const behaviorSpecificSelect = document.getElementById(`behaviorSelect_${i}`);
-                const consequenceSelect = document.getElementById(`consequenceSelect_${i}`);
-
-                const typeValue = typeSelect ? typeSelect.value : '';
-                const antecedentValue = antecedentSelect ? antecedentSelect.value : '';
-                const specificBehaviorValue = behaviorSpecificSelect ? behaviorSpecificSelect.value : '';
-                const consequenceValue = consequenceSelect ? consequenceSelect.value : '';
-
-                if (typeValue || antecedentValue || specificBehaviorValue || consequenceValue) {
-                    let title = typeValue && typeValue !== "Other" ? typeValue : `Behavior Pattern ${i + 1}`;
-                    if (typeValue === "Other" && anecdotal) title += " (details in anecdotal notes)";
-                    else if (typeValue === "Other") title += " (unspecified, refer to notes)";
-
-                    behaviorPatterns.push({
-                        title: title,
-                        type: typeValue, // Keep type for more complex logic
-                        antecedent: antecedentValue,
-                        behavior: specificBehaviorValue,
-                        consequence: consequenceValue,
-                        index: i // To reference specific anecdotal notes
-                    });
-                }
-            }
-
-            // --- 1. Function Hypothesis Statement ---
-            let hypothesisStatements = [];
-            if (behaviorPatterns.length === 0 && anecdotal) {
-                hypothesisStatements.push(`Based on general anecdotal notes, the student may exhibit varied challenging behaviors (e.g., as described: "${anecdotal.substring(0, Math.min(anecdotal.length, 50))}...") likely to achieve unspecified outcomes. Further observation is needed for precise function identification.`);
-            } else {
-                behaviorPatterns.forEach(pattern => {
-                    const ant = pattern.antecedent || 'various unspecified antecedents';
-                    const beh = pattern.behavior || 'unspecified problem behaviors';
-                    const con = pattern.consequence || 'unspecified consequences';
-                    let functionHypothesis = "to fulfill an unknown need or purpose."; // Default
-
-                    // More complex rule-based function inference
-                    if (con.toLowerCase().includes("attention") || con.toLowerCase().includes("peer reactions") || pattern.type === "Disruptive Behavior (Non-Aggressive)") {
-                        functionHypothesis = "to gain attention (e.g., from adults or peers).";
-                    } else if (con.toLowerCase().includes("task postponed") || con.toLowerCase().includes("breaks given") || con.toLowerCase().includes("task removal") || pattern.type === "Task Refusal / Noncompliance" || pattern.type === "Elopement (Running Away)") {
-                        functionHypothesis = "to escape or avoid tasks, demands, or non-preferred situations.";
-                    } else if (con.toLowerCase().includes("access to desired items") || pattern.type === "Property Destruction") {
-                        functionHypothesis = "to gain access to desired tangibles or activities.";
-                    } else if (pattern.type === "Self-Injurious Behavior" || pattern.antecedent.toLowerCase().includes("sensory discomfort") || pattern.behavior.toLowerCase().includes("fiddling") || pattern.behavior.toLowerCase().includes("wandering")) {
-                        functionHypothesis = "to gain or escape sensory input.";
-                    } else if (pattern.type === "Physical Aggression" || pattern.type === "Verbal Aggression") {
-                        // Aggression can be complex, often attention, escape, or tangible
-                        if (con.toLowerCase().includes("attention")) {
-                            functionHypothesis = "to gain attention (e.g., from adults or peers) through aggressive means.";
-                        } else if (con.toLowerCase().includes("removal from activity") || con.toLowerCase().includes("loss of privileges")) {
-                            functionHypothesis = "to escape or avoid demands/situations, or to gain access to something denied.";
-                        } else {
-                            functionHypothesis = "potentially to gain attention or escape a situation.";
-                        }
-                    } else if (pattern.type === "Off-Task Behavior") {
-                         if (con.toLowerCase().includes("prompts to focus")) {
-                             functionHypothesis = "to gain attention or avoid demands.";
-                         } else {
-                             functionHypothesis = "likely to escape or avoid tasks, or to gain access to preferred non-task activities.";
-                         }
-                    }
-
-                    hypothesisStatements.push(`For **${pattern.title}**: When ${ant}, the student will ${beh}, because ${con}, therefore the function of the behavior appears to be ${functionHypothesis}`);
-                });
-            }
-            sections["Function Hypothesis Statement"] = hypothesisStatements.join('\n\n');
-
-
-            // --- 2. Antecedent Strategies ---
-            let antecedentStrategies = [];
-            if (behaviorPatterns.length === 0) {
-                antecedentStrategies.push(`Implement general proactive strategies based on student's age (${age}), grade (${grade}), and existing strengths (${strengthsInterests}). Focus on providing a structured and predictable environment. Ensure clarity in expectations and transitions.`);
-                if (referral) antecedentStrategies.push(`Consider the referral information regarding "${referral.split('.')[0]}..." when structuring the environment.`);
-            } else {
-                behaviorPatterns.forEach(pattern => {
-                    antecedentStrategies.push(`**For ${pattern.title}:**`);
-                    let strategies = [];
-
-                    // Tailor strategies based on inferred function
-                    const functionText = sections["Function Hypothesis Statement"].split(`For **${pattern.title}**: `)[1] || "";
-                    if (functionText.includes("attention")) {
-                        strategies.push(`Increase positive adult attention during non-problematic periods (e.g., specific praise for engagement, quick check-ins every 5-10 minutes leveraging student's interest in ${strengthsInterests.split(',')[0] || 'learning'}).`);
-                        strategies.push(`Pre-teach appropriate ways to gain attention, such as raising a hand or using an "I need help" card, especially before tasks where ${pattern.antecedent} is common.`);
-                    }
-                    if (functionText.includes("escape or avoid")) {
-                        strategies.push(`Provide choice within tasks (e.g., "Do you want to start with math or reading?", "Work at your desk or in the quiet corner?").`);
-                        strategies.push(`Break down tasks into smaller, manageable chunks. Provide clear visual instructions if student is at ${pragmaticLanguageSkillsSelect.value} level.`);
-                        strategies.push(`Offer scheduled breaks proactively, unrelated to problem behavior, incorporating ${reinforcers.split(',')[0] || 'preferred activities'} during breaks.`);
-                        strategies.push(`Utilize first-then statements (e.g., "First [task], then [preferred activity like ${reinforcers.split(',')[0] || 'computer time'}]").`);
-                    }
-                    if (functionText.includes("gain access")) {
-                        strategies.push(`Teach and provide access to desired items/activities (${reinforcers}) contingently on appropriate behavior, not problematic behavior.`);
-                        strategies.push(`Use a visual schedule or token board to show when access to ${reinforcers.split(',')[0] || 'a preferred item'} will be earned.`);
-                    }
-                    if (functionText.includes("sensory")) {
-                        strategies.push(`Provide appropriate sensory input or outlets (e.g., fidget tools if student demonstrates fiddling, movement breaks if restless, quiet space if overstimulated).`);
-                        strategies.push(`Modify the environment to reduce overstimulation or provide necessary stimulation (e.g., quiet work area, weighted lap pad).`);
-                    }
-
-                    // General strategies applicable to all
-                    strategies.push(`Enhance predictability with clear schedules and verbal warnings before transitions, especially given current behavioral skills (${behavioralLevel}).`);
-                    strategies.push(`Incorporate ${strengthsInterests} into instructional activities or calm-down routines.`);
-
-                    antecedentStrategies.push(strategies.join('\n- '));
-                });
-            }
-            sections["Antecedent Strategies"] = antecedentStrategies.join('\n\n');
-
-
-            // --- 3. Short-term Replacement Behaviors ---
-            let shortTermBehaviors = [];
-            if (behaviorPatterns.length === 0) {
-                shortTermBehaviors.push(`Given the student's age (${age}), grade (${grade}), and current skill levels (${behavioralLevel}, ${socialLevel}, ${pragmaticLevel}), focus on foundational communication skills. Examples include: raising hand to ask a question or request a break, using "please" and "thank you" for items, or using a simple "I'm upset" statement.`);
-            } else {
-                behaviorPatterns.forEach(pattern => {
-                    shortTermBehaviors.push(`**For ${pattern.title} (replaces ${pattern.behavior || 'problem behavior'}):**`);
-                    let behaviors = [];
-                    const functionText = sections["Function Hypothesis Statement"].split(`For **${pattern.title}**: `)[1] || "";
-
-                    if (functionText.includes("attention")) {
-                        behaviors.push(`Politely raising hand to ask for attention/help, waiting for acknowledgement, or requesting a peer interaction.`);
-                    } else if (functionText.includes("escape or avoid")) {
-                        behaviors.push(`Asking for a short break ("I need a break"), requesting help ("Help please"), or asking for a task modification ("Can I do part A first?").`);
-                    } else if (functionText.includes("gain access")) {
-                        behaviors.push(`Verbally requesting a desired item/activity ("Can I have the ${reinforcers.split(',')[0] || 'toy'}?"), or using a visual to request.`);
-                    } else if (functionText.includes("sensory")) {
-                        behaviors.push(`Requesting a sensory tool (e.g., "fidget please"), asking for a movement break, or requesting a quieter space.`);
-                    } else { // Fallback for unknown/complex functions
-                        behaviors.push(`Communicating needs directly (e.g., "I don't understand," "I need a minute"), or asking for a specific preferred item/activity.`);
-                    }
-
-                    // Incorporate developmental levels
-                    if (pragmaticLevel === "Foundational Communicator" || pragmaticLevel === "Emerging Conversationalist") {
-                        behaviors[0] = behaviors[0].replace(/verbally requesting|asking for/gi, "using a visual card or simple phrase to request");
-                    }
-                    if (socialLevel === "Social Initiator" || socialLevel === "Emerging Peer") {
-                        behaviors[0] = behaviors[0].replace(/peer interaction/gi, "adult-mediated peer interaction");
-                    }
-                    behaviors.push(`(These behaviors align with the student's current ${behavioralLevel}, ${socialLevel}, and ${pragmaticLevel} developmental levels.)`);
-                    shortTermBehaviors.push(behaviors.join('\n- '));
-                });
-            }
-            sections["Short-term Replacement Behaviors"] = shortTermBehaviors.join('\n\n');
-
-
-            // --- 4. Teaching Strategies for Short-Term Replacement Behaviors ---
-            let teachingStrategies = [];
-            if (behaviorPatterns.length === 0) {
-                teachingStrategies.push(`Employ direct instruction, modeling, and role-playing for appropriate communication and self-regulation skills. Utilize visual aids and social stories, tailored to the student's learning style and interests in ${strengthsInterests}.`);
-            } else {
-                behaviorPatterns.forEach(pattern => {
-                    teachingStrategies.push(`**For ${pattern.title} (teaching replacement for ${pattern.behavior || 'problem behavior'}):**`);
-                    let strategies = [];
-                    const functionText = sections["Function Hypothesis Statement"].split(`For **${pattern.title}**: `)[1] || "";
-
-                    strategies.push(`Explicitly teach the identified short-term replacement behavior (e.g., raising hand, requesting a break) using clear, concise language and visual supports.`);
-                    strategies.push(`Model the desired behavior, then have the student practice through role-playing scenarios that typically trigger ${pattern.antecedent}.`);
-                    strategies.push(`Provide immediate, specific feedback after practice: "Yes, that's exactly how to ask for a break!"`);
-                    strategies.push(`Break down complex skills into smaller steps, reflecting the student's current ${behavioralLevel} and ${pragmaticLevel}.`);
-                    strategies.push(`Integrate student's interests (e.g., ${strengthsInterests}) into teaching examples or rewards for practicing. For a student who loves dinosaurs, practice requesting "dinosaur time."`);
-                    strategies.push(`Utilize pre-correction: review expected behaviors and practice before high-risk times (e.g., before transitions if ${pattern.antecedent} involves transitions).`);
-                    teachingStrategies.push(strategies.join('\n- '));
-                });
-            }
-            sections["Teaching Strategies for Short-Term Replacement Behaviors"] = teachingStrategies.join('\n\n');
-
-
-            // --- 5. Reinforcement Strategies for Short-Term Replacement Behaviors ---
-            let reinforcementStrategies = [];
-            if (behaviorPatterns.length === 0) {
-                reinforcementStrategies.push(`Provide immediate and frequent access to preferred reinforcers (${reinforcers}) when desired behaviors are exhibited. Use a flexible reinforcement schedule and gradually fade as the student gains independence.`);
-            } else {
-                behaviorPatterns.forEach(pattern => {
-                    reinforcementStrategies.push(`**For ${pattern.title} (reinforcing replacement for ${pattern.behavior || 'problem behavior'}):**`);
-                    let strategies = [];
-                    const functionText = sections["Function Hypothesis Statement"].split(`For **${pattern.title}**: `)[1] || "";
-
-                    strategies.push(`Provide immediate and enthusiastic access to ${reinforcers.split(',')[0] || 'a preferred item/activity'} (e.g., "Great job raising your hand, you earned 2 minutes of ${reinforcers.split(',')[0] || 'computer time'}!") when the student uses the replacement behavior.`);
-                    strategies.push(`Use differential reinforcement: richly reinforce the replacement behavior, and withhold reinforcement for the problem behavior.`);
-                    strategies.push(`Consider a token economy or sticker chart if the student responds well to visual tracking, leading to larger rewards from ${reinforcers}.`);
-                    strategies.push(`Ensure reinforcers are meaningful and directly tied to the hypothesized function. For attention-seeking, provide verbal praise and positive interaction. For escape, provide the desired break or task modification.`);
-                    strategies.push(`Incorporate positive peer attention if the student is at the ${socialLevel} level and peer attention is a reinforcer.`);
-                    reinforcementStrategies.push(strategies.join('\n- '));
-                });
-            }
-            sections["Reinforcement Strategies for Short-Term Replacement Behaviors"] = reinforcementStrategies.join('\n\n');
-
-
-            // --- 6. Long-term Replacement Behaviors ---
-            let longTermBehaviors = [];
-            longTermBehaviors.push(`The long-term goal is to foster independent, generalized skills that reduce the need for problem behaviors across various settings.`);
-            longTermBehaviors.push(`Based on student's age (${age}), grade (${grade}), and current skill levels:`);
-
-            let behavioralLongTerm = `**Behavioral (Aiming for ${behavioralSkillsSelect.value === "Autonomous Problem-Solver" ? "Autonomous Problem-Solver" : "growth towards the next level from " + behavioralSkillsSelect.value}):**`;
-            if (behavioralLevel.includes("Regulator")) behavioralLongTerm += ` Develop self-regulation strategies (e.g., identifying early warning signs of frustration, using calming techniques like deep breathing or counting to 10).`;
-            else if (behavioralLevel.includes("Manager")) behavioralLongTerm += ` Teach self-monitoring techniques and goal setting for behavior. Promote reflection on behavioral choices.`;
-            else behavioralLongTerm += ` Encourage greater independence in managing impulses and adjusting to new situations, incorporating personal strengths (${strengthsInterests}).`;
-            longTermBehaviors.push(behavioralLongTerm);
-
-            let socialLongTerm = `**Social (Aiming for ${socialSkillsSelect.value === "Leadership Model" ? "Leadership Model" : "growth towards the next level from " + socialSkillsSelect.value}):**`;
-            if (socialLevel.includes("Initiator") || socialLevel.includes("Peer")) socialLongTerm += ` Facilitate structured opportunities for positive peer interactions. Teach basic social problem-solving (e.g., sharing, turn-taking).`;
-            else if (socialLevel.includes("Participant") || socialLevel.includes("Navigator")) socialLongTerm += ` Develop skills in managing conflict, understanding social cues, and building reciprocal friendships, leveraging interests (${strengthsInterests}).`;
-            else socialLongTerm += ` Promote empathy, collaboration, and leadership skills within group activities.`;
-            longTermBehaviors.push(socialLongTerm);
-
-            let pragmaticLongTerm = `**Pragmatic Language (Aiming for ${pragmaticLanguageSkillsSelect.value === "Discourse Leader" ? "Discourse Leader" : "growth towards the next level from " + pragmaticLanguageSkillsSelect.value}):**`;
-            if (pragmaticLevel.includes("Communicator") || pragmaticLevel.includes("Conversationalist")) pragmaticLongTerm += ` Expand vocabulary for expressing emotions and needs. Teach how to initiate and maintain conversations appropriately.`;
-            else if (pragmaticLevel.includes("Speaker") || pragmaticLevel.includes("Interpreter")) pragmaticLongTerm += ` Develop skills in adjusting communication style for different audiences/situations. Teach negotiation and persuasion skills.`;
-            else pragmaticLongTerm += ` Foster complex communication skills, including abstract reasoning and leading group discussions.`;
-            longTermBehaviors.push(pragmaticLongTerm);
-
-            longTermBehaviors.push(`Overall, the goal is to build the student's capacity for independent problem-solving and self-advocacy, utilizing their unique ${strengthsInterests} as foundations.`);
-            sections["Long-term Replacement Behaviors"] = longTermBehaviors.join('\n\n');
-
-
-            // --- 7. Response Strategies for Problem Behavior ---
-            let responseStrategies = [];
-            if (behaviorPatterns.length === 0) {
-                responseStrategies.push(`**General Response Strategies (for unspecified problem behaviors):**`);
-                responseStrategies.push(`    a. Immediate actions: Prioritize safety. Calmly block any unsafe behaviors. Ensure student and peer safety. Remove any potentially dangerous objects.`);
-                responseStrategies.push(`    b. De-escalation: Maintain a calm and neutral demeanor. Use minimal verbal prompts. Offer a brief, non-demanding quiet space or a calming sensory input if appropriate.`);
-                responseStrategies.push(`    c. Clear, brief, consistent responses: State the expected behavior clearly and concisely (e.g., "Hands down," "Sit please"). Avoid lecturing, arguing, or extensive questioning during the behavior.`);
-                responseStrategies.push(`    d. Follow-up: Once calm, provide a brief re-teaching of the appropriate replacement behavior. Facilitate a restorative conversation if appropriate for their developmental level. Prompt re-engagement with tasks.`);
-                responseStrategies.push(`    e. Avoid accidental reinforcement: Be highly aware of what the student is gaining (attention, escape, tangibles) when the behavior occurs and avoid providing those outcomes. For example, if behavior typically gains attention, do not engage in extensive verbal interaction during the behavior.`);
-            } else {
-                behaviorPatterns.forEach(pattern => {
-                    responseStrategies.push(`**For ${pattern.title} (e.g., ${pattern.behavior || 'problem behavior'}):**`);
-                    const functionText = sections["Function Hypothesis Statement"].split(`For **${pattern.title}**: `)[1] || "";
-                    let specificResponse = [];
-
-                    specificResponse.push(`    a. Immediate actions:`);
-                    if (pattern.type === "Physical Aggression" || pattern.type === "Self-Injurious Behavior" || pattern.type === "Property Destruction") {
-                        specificResponse.push(`        - Ensure safety: Immediately create distance, block physical contact (without physical restraint unless absolutely necessary for safety), remove breakable/throwable objects. Protect student and others.`);
-                    } else if (pattern.type === "Elopement (Running Away)") {
-                        specificResponse.push(`        - Safely follow and calmly redirect the student back to the designated area. Ensure environmental safety (e.g., doors, exits).`);
-                    } else {
-                        specificResponse.push(`        - Maintain calm, neutral presence. Disengage attention if possible without ignoring safety or severe disruption.`);
-                    }
-
-                    specificResponse.push(`    b. De-escalation techniques:`);
-                    if (functionText.includes("escape or avoid")) {
-                        specificResponse.push(`        - Reduce demands briefly or offer a "mini-break" (e.g., "You can have 1 minute to yourself, then we'll try again"). Avoid arguing about tasks.`);
-                    } else if (functionText.includes("attention")) {
-                        specificResponse.push(`        - Use planned ignoring for minor behaviors. Provide neutral, brief redirection only when absolutely necessary (e.g., "Work time").`);
-                    } else if (functionText.includes("gain access")) {
-                        specificResponse.push(`        - State clearly that the item/activity is not available during the behavior. Reiterate when it *will* be available (e.g., "First, finish your work, then you can have the ${reinforcers.split(',')[0] || 'toy'}").`);
-                    } else if (functionText.includes("sensory")) {
-                        specificResponse.push(`        - Offer alternative, appropriate sensory input or a designated sensory break area.`);
-                    }
-                    specificResponse.push(`        - Maintain a calm, low voice and neutral body language. Avoid power struggles.`);
-
-
-                    specificResponse.push(`    c. Clear, brief, and consistent verbal/non-verbal responses:`);
-                    specificResponse.push(`        - Use minimal words. Focus on the desired behavior, not the problem behavior (e.g., "Sit down," "Hands to self," "Quiet voice").`);
-                    specificResponse.push(`        - Avoid emotional responses, lecturing, or extensive questioning during the incident.`);
-                    specificResponse.push(`        - Use visuals or gestures if student responds well to non-verbal cues (aligned with ${pragmaticLanguageSkillsSelect}).`);
-
-                    specificResponse.push(`    d. Procedures for follow-up:`);
-                    specificResponse.push(`        - Once calm, briefly re-teach the specific short-term replacement behavior related to this pattern. Guide the student through a practice trial.`);
-                    specificResponse.push(`        - Process the event (e.g., "What could you do differently next time?") once the student is regulated, adapting the complexity to their ${socialLevel} and ${pragmaticLevel}.`);
-                    specificResponse.push(`        - Facilitate a smooth return to the learning environment as soon as possible after resolution.`);
-
-                    specificResponse.push(`    e. How to avoid inadvertent reinforcement:`);
-                    if (functionText.includes("attention")) {
-                        specificResponse.push(`        - Ensure problem behavior does NOT result in extended one-on-one attention from staff or peers. Deliver consequences calmly and briefly.`);
-                    } else if (functionText.includes("escape or avoid")) {
-                        specificResponse.push(`        - Do not allow the behavior to result in escape from the task or demand. Re-present the demand after a brief period of calm, or provide a planned break *after* a small step of compliance.`);
-                    } else if (functionText.includes("gain access")) {
-                        specificResponse.push(`        - Never provide the desired item/activity while the problem behavior is occurring or immediately after. Access must be contingent on appropriate behavior.`);
-                    } else if (functionText.includes("sensory")) {
-                        specificResponse.push(`        - Do not allow the behavior to result in uncontrolled or excessive sensory input. Redirect to appropriate sensory tools/breaks.`);
-                    }
-                    specificResponse.push(`        - Consistency across all staff is paramount to prevent accidental reinforcement.`);
-
-                    responseStrategies.push(specificResponse.join('\n'));
-                });
-            }
-            sections["Response Strategies for Problem Behavior"] = responseStrategies.join('\n\n');
-
-
-            return sections;
-        }
-
-
-        function parsePlanSections(sectionsObject) {
-            // This function is now simplified as we are directly creating the sections object
-            // It just returns the object as is, assuming generateLocalBIP produces the correct structure
-            return sectionsObject;
-        }
-
-        function showErrorOutput(msg) {
-            bipFunctionHypothesis.innerHTML = `<p class="text-red-600">${msg}</p>`;
-            bipAntecedentStrategies.innerHTML = "";
-            bipShortTermBehaviors.innerHTML = "";
-            bipTeachingStrategies.innerHTML = "";
-            bipReinforcementShortTerm.innerHTML = "";
-            bipLongTermBehaviors.innerHTML = "";
-            bipResponseStrategies.innerHTML = "";
-            bipOutputDiv.classList.remove('hidden');
-        }
-
-        function hidePlanOutput() {
-            bipFunctionHypothesis.textContent = "";
-            bipAntecedentStrategies.textContent = "";
-            bipShortTermBehaviors.textContent = "";
-            bipTeachingStrategies.textContent = "";
-            bipReinforcementShortTerm.textContent = "";
-            bipLongTermBehaviors.textContent = "";
-            bipResponseStrategies.textContent = "";
-            bipOutputDiv.classList.add('hidden');
-        }
-
-        function getActiveProblemBehaviorPhrases() {
-            const phrases = new Set();
-            for (let i = 0; i < 3; i++) {
-                const typeSelect = document.getElementById(`behaviorTypeSelect_${i}`);
-                const behaviorSpecificSelect = document.getElementById(`behaviorSelect_${i}`);
-
-                const typeValue = typeSelect ? typeSelect.value : '';
-                const specificBehaviorValue = behaviorSpecificSelect ? behaviorSpecificSelect.value : '';
-
-                if (typeValue && typeValue !== "Other" && typeValue.trim().length > 2) {
-                    phrases.add(typeValue.trim());
-                }
-                if (specificBehaviorValue && specificBehaviorValue !== "Other (Specify in Notes)" && specificBehaviorValue !== "Other" && specificBehaviorValue.trim().length > 2) {
-                    phrases.add(specificBehaviorValue.trim());
-                }
-            }
-            return Array.from(phrases);
-        }
-
-        function escapeRegExp(string) {
-            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        }
-
-        function showPlanSections(sections, problemBehaviorPhrases = []) {
-            const fallbackMsg = "The plan could not be generated with the provided inputs. Please ensure all relevant fields are filled or try different selections.";
-
-            function cleanAndBoldContent(text, phrasesToBold) {
-                if (typeof text !== 'string') return '';
-                let processedText = text.replace(/\*/g, ''); // Remove all asterisks
-
-                const sortedPhrases = [...phrasesToBold].sort((a, b) => b.length - a.length);
-
-                sortedPhrases.forEach(phrase => {
-                    if (phrase && phrase.trim() !== '') {
-                        const regex = new RegExp(`(\\b${escapeRegExp(phrase.trim())}\\b)`, 'gi');
-                        processedText = processedText.replace(regex, (match) => `<strong>${match}</strong>`);
-                    }
-                });
-                return processedText;
-            }
-
-            let hypothesisContent = sections["Function Hypothesis Statement"] || fallbackMsg;
-            const hypothesisDisplayPrefixLine1 = "Function Hypothesis Statement - The following provides an overview of the current behavior(s).";
-            const hypothesisDisplayPrefixLine2 = "Summary Statement: ";
-            bipFunctionHypothesis.innerHTML = cleanAndBoldContent(`${hypothesisDisplayPrefixLine1}\n${hypothesisDisplayPrefixLine2}${hypothesisContent}`, problemBehaviorPhrases);
-
-            bipAntecedentStrategies.innerHTML = cleanAndBoldContent(sections["Antecedent Strategies"] || fallbackMsg, problemBehaviorPhrases);
-            bipShortTermBehaviors.innerHTML = cleanAndBoldContent(sections["Short-term Replacement Behaviors"] || fallbackMsg, problemBehaviorPhrases);
-            bipTeachingStrategies.innerHTML = cleanAndBoldContent(sections["Teaching Strategies for Short-Term Replacement Behaviors"] || fallbackMsg, problemBehaviorPhrases);
-            bipReinforcementShortTerm.innerHTML = cleanAndBoldContent(sections["Reinforcement Strategies for Short-Term Replacement Behaviors"] || fallbackMsg, problemBehaviorPhrases);
-            bipLongTermBehaviors.innerHTML = cleanAndBoldContent(sections["Long-term Replacement Behaviors"] || fallbackMsg, problemBehaviorPhrases);
-            bipResponseStrategies.innerHTML = cleanAndBoldContent(sections["Response Strategies for Problem Behavior"] || fallbackMsg, problemBehaviorPhrases);
-
-            bipOutputDiv.classList.remove('hidden');
-        }
-
-        async function generatePlanWithGemini() {
-            generateBIPSpinner.classList.remove('hidden');
-            generateBIPButton.disabled = true;
-            sessionStatusDisplay.textContent = "Generating...";
-            hidePlanOutput();
-
-            const activePhrases = getActiveProblemBehaviorPhrases();
-            const generatedSections = generateLocalBIP(); // Call local generation logic
-
-            if (generatedSections && Object.keys(generatedSections).some(key => generatedSections[key].trim().length > 0)) {
-                showPlanSections(generatedSections, activePhrases);
-            } else {
-                showErrorOutput("Could not generate a meaningful plan. Please ensure relevant behavior patterns and details are selected or provided.");
-            }
-
-            generateBIPSpinner.classList.add('hidden');
-            generateBIPButton.disabled = false;
-            sessionStatusDisplay.textContent = "Active";
-        }
-
-        generateBIPButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            generatePlanWithGemini();
-        });
-
-        copyBIPButton.addEventListener('click', () => {
-            const monitoringStatementText = monitoringStatementContentElement ? monitoringStatementContentElement.textContent.trim() : "";
-            function getCleanText(elementId) {
-                const element = document.getElementById(elementId);
-                if (!element) return "";
-                const clone = element.cloneNode(true);
-                return clone.textContent || "";
-            }
-
-            let textToCopy =
-`${getCleanText('bipFunctionHypothesis').trim()}
-
-Antecedent Strategies:
-${getCleanText('bipAntecedentStrategies').trim()}
-
-Short-term Replacement Behaviors:
-${getCleanText('bipShortTermBehaviors').trim()}
-
-Teaching Strategies for Short-Term Replacement Behaviors:
-${getCleanText('bipTeachingStrategies').trim()}
-
-Reinforcement Strategies for Short-Term Replacement Behaviors:
-${getCleanText('bipReinforcementShortTerm').trim()}
-
-Long-term Replacement Behaviors:
-${getCleanText('bipLongTermBehaviors').trim()}
-
-Response Strategies for Problem Behavior:
-${getCleanText('bipResponseStrategies').trim()}
-
-Monitoring and Plan Review:
-${monitoringStatementText}
-`;
-            navigator.clipboard.writeText(textToCopy.trim());
-            const originalButtonText = copyBIPButton.innerHTML;
-            copyBIPButton.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
-            setTimeout(() => { copyBIPButton.innerHTML = originalButtonText; }, 2000);
-        });
-
-        document.getElementById('newPlanButton').addEventListener('click', () => {
-            studentAgeInput.value = '';
-            studentGradeSelect.value = '';
-            strengthsInterestsResiliencyInput.value = '';
-            reinforcerPreferencesInput.value = '';
-            anecdotalInput.value = '';
-            referralInput.value = '';
-            behavioralSkillsSelect.value = '';
-            socialSkillsSelect.value = '';
-            pragmaticLanguageSkillsSelect.value = '';
-
-            for (let i = 0; i < 3; i++) {
-                const behaviorBlock = document.querySelector(`.behavior-block[data-behavior-index="${i}"]`);
-                if (behaviorBlock) {
-                    const header = behaviorBlock.querySelector('h3');
-                    if (header) {
-                            header.textContent = `Behavior Pattern ${i + 1}${i > 0 ? ' (Optional)' : ''}`;
-                    }
-                }
-
-                const behaviorTypeSelect = document.getElementById(`behaviorTypeSelect_${i}`);
-                if (behaviorTypeSelect) {
-                    behaviorTypeSelect.value = '';
-                    behaviorTypeSelect.dispatchEvent(new Event('change'));
-                }
-                const antecedentSelect = document.getElementById(`antecedentSelect_${i}`);
-                if (antecedentSelect) populateSelectWithOptions(antecedentSelect, [], "Select Antecedent (after choosing type)");
-
-                const behaviorSelect = document.getElementById(`behaviorSelect_${i}`);
-                if (behaviorSelect) populateSelectWithOptions(behaviorSelect, [], "Select Specific Behavior (after choosing type)");
-
-                const consequenceSelect = document.getElementById(`consequenceSelect_${i}`);
-                if (consequenceSelect) populateSelectWithOptions(consequenceSelect, [], "Select Consequence (after choosing type)");
-            }
-
-            addReferralNo.checked = true;
-            referralInfoContainer.classList.add('hidden');
-            hidePlanOutput();
-            sessionStatusDisplay.textContent = "Active";
-        });
-    </script>
 </body>
 </html>

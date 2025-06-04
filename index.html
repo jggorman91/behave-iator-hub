@@ -49,8 +49,10 @@
         }
     </style>
     <script>
+        // Check if terms have been accepted. If not, redirect to acceptance page.
+        // Assumes acceptance.html is in the same directory as index.html.
         if (!localStorage.getItem('termsAccepted')) {
-            // window.location.href = '/behave-iator-hub/acceptance.html'; // Kept original path
+            window.location.href = 'acceptance.html';
         }
     </script>
 </head>
